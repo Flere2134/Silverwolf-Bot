@@ -158,4 +158,4 @@ async def char(ctx, name):
 with open("C:/Users/aaron/Desktop/Aaron/SW Bot credentials/token.txt") as file:
     token = file.read()
 
-bot.run(token)
+bot.run(token) #run bot
