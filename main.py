@@ -9,8 +9,16 @@ TOKEN = os.getenv("SW_BOT_TOKEN")
 if not TOKEN:
     raise ValueError("Bot token is missing! Set it in Discloud environment variables.")
 
+# google sheet api setup
 scope = ["https://www.googleapis.com/auth/spreadsheets"]
-creds = ServiceAccountCredentials.from_json_keyfile_name('C:/Users/aaron/Desktop/Aaron/SW Bot credentials/silverwolf-bot-acc2.json', scopes=scope)
+json_creds = os.getenv("GOOGLE_SHEETS_CREDENTIALS")
+if not json_creds:
+    raise ValueError("Credentials missing! Store them in Secrets")
+
+with open("creds.json", "w") as f:
+    f.write(json_creds)
+
+creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json', scopes=scope)
 client = gspread.authorize(creds)
 
 sheetid = "1hjXI9lh6im_kkRmvSJ-FO7Ucp5sKcJEZCCRvoxz2Ix8"
@@ -163,4 +171,5 @@ async def char(ctx, name):
 with open("C:/Users/aaron/Desktop/Aaron/SW Bot credentials/token.txt") as file:
     token = file.read()
 
+keep_alive()
 bot.run(token)
