@@ -4,6 +4,24 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import asyncio
 import os
+from flask import Flask
+from threading import Thread
+
+#for uptime
+app = Flask('')
+
+
+@app.route('/')
+def home():
+    return "I'm alive"
+
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+
+def keep_alive():
+    Thread(target=run).start()
 
 TOKEN = os.getenv("SW_BOT_TOKEN")
 if not TOKEN:
