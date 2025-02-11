@@ -3,6 +3,11 @@ from discord.ext import commands
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import asyncio
+import os
+
+TOKEN = os.getenv("SW_BOT_TOKEN")
+if not TOKEN:
+    raise ValueError("Bot token is missing! Set it in Discloud environment variables.")
 
 scope = ["https://www.googleapis.com/auth/spreadsheets"]
 creds = ServiceAccountCredentials.from_json_keyfile_name('C:/Users/aaron/Desktop/Aaron/SW Bot credentials/silverwolf-bot-acc2.json', scopes=scope)
